@@ -1,0 +1,80 @@
+services:
+  - type: web
+    name: fleet-management-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        sync: false
+      - key: DB_HOST
+        fromDatabase:
+          name: fleet-management-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: fleet-management-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: fleet-management-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: fleet-management-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: fleet-management-db
+          property: password
+      - key: JWT_SECRET
+        generate: true
+      - key: JWT_EXPIRES_IN
+        value: 24h
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 7d
+      - key: REDIS_HOST
+        sync: false
+      - key: REDIS_PORT
+        sync: false
+      - key: REDIS_PASSWORD
+        sync: false
+      - key: MQTT_BROKER_URL
+        sync: false
+      - key: MQTT_USERNAME
+        sync: false
+      - key: MQTT_PASSWORD
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_PHONE_NUMBER
+        sync: false
+      - key: GOOGLE_MAPS_API_KEY
+        sync: false
+      - key: ENCRYPTION_KEY
+        generate: true
+      - key: DISABLE_TCP_SERVER
+        value: true
+      - key: DISABLE_MQTT_CLIENT
+        value: true
+
+databases:
+  - name: fleet-management-db
+    databaseName: fleet_management
+    user: fleet_admin

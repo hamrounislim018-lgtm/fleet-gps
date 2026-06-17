@@ -137,9 +137,18 @@ server.listen(PORT, async () => {
   // Initialize WebSocket for real-time tracking
   await initWebSocket(server);
 
-  // Start GPS servers
-  startTCPServer();
-  startMQTTClient();
+  // Start GPS servers (conditionally for platforms that support custom ports)
+  if (process.env.DISABLE_TCP_SERVER !== 'true') {
+    startTCPServer();
+  } else {
+    logger.info('TCP server disabled (DISABLE_TCP_SERVER=true)');
+  }
+  
+  if (process.env.DISABLE_MQTT_CLIENT !== 'true') {
+    startMQTTClient();
+  } else {
+    logger.info('MQTT client disabled (DISABLE_MQTT_CLIENT=true)');
+  }
 
   // Start scheduled jobs
   initCronJobs();
