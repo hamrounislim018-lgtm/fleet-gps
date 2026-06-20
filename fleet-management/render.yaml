@@ -75,7 +75,4 @@ services:
       - key: DISABLE_MQTT_CLIENT
         value: true
 
-databases:
-  - name: fleet-management-db
-    databaseName: fleet_management
-    user: fleet_admin
+# Database already created manually in Render dashboard
