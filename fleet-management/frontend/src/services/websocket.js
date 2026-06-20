@@ -13,9 +13,10 @@ class WebSocketService {
   connect(token) {
     if (this.ws?.readyState === WebSocket.OPEN) return;
 
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = window.location.host;
-    const url = `${protocol}//${host}/ws?token=${token}`;
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+    const url = apiUrl 
+      ? apiUrl.replace(/^https?:\/\//, 'wss://').replace(/^http:\/\//, 'ws://') + '/ws?token=' + token
+      : `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws?token=${token}`;
 
     this.ws = new WebSocket(url);
 
