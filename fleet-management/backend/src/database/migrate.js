@@ -13,6 +13,7 @@ async function migrate() {
     logger.info('Database migration completed successfully');
   } catch (error) {
     logger.error('Migration failed:', error.message);
+    console.error('Full error:', error);
     process.exit(1);
   } finally {
     client.release();
