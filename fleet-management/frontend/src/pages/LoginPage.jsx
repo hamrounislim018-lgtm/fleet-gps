@@ -21,7 +21,10 @@ export default function LoginPage() {
       await login(data.email, data.password);
       navigate('/');
     } catch (error) {
-      toast.error(error.response?.data?.message || t('email_required') + ' / ' + t('password_required'));
+      const errorMessage = error.response?.data?.message || 
+                           error.message || 
+                           t('login_failed');
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
