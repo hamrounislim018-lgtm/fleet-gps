@@ -3,5 +3,11 @@
   "outputDirectory": "dist",
   "devCommand": "npx vite",
   "installCommand": "npm install",
-  "framework": "vite"
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
