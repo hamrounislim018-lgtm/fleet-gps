@@ -148,14 +148,19 @@ CREATE TABLE IF NOT EXISTS gps_positions (
 ) PARTITION BY RANGE (created_at);
 
 -- Create monthly partitions for performance
+DROP TABLE IF EXISTS gps_positions_2024_01;
 CREATE TABLE gps_positions_2024_01 PARTITION OF gps_positions
     FOR VALUES FROM ('2024-01-01') TO ('2024-02-01');
+DROP TABLE IF EXISTS gps_positions_2024_12;
 CREATE TABLE gps_positions_2024_12 PARTITION OF gps_positions
     FOR VALUES FROM ('2024-12-01') TO ('2025-01-01');
+DROP TABLE IF EXISTS gps_positions_2025_01;
 CREATE TABLE gps_positions_2025_01 PARTITION OF gps_positions
     FOR VALUES FROM ('2025-01-01') TO ('2025-02-01');
+DROP TABLE IF EXISTS gps_positions_2025_06;
 CREATE TABLE gps_positions_2025_06 PARTITION OF gps_positions
     FOR VALUES FROM ('2025-06-01') TO ('2026-01-01');
+DROP TABLE IF EXISTS gps_positions_2026_01;
 CREATE TABLE gps_positions_2026_01 PARTITION OF gps_positions
     FOR VALUES FROM ('2026-01-01') TO ('2027-01-01');
 
