@@ -48,7 +48,26 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'https://fleetgps.vercel.app', 'https://fleetgps.vercel.app/'],
+  origin: function(origin, callback) {
+    const allowedOrigins = process.env.FRONTEND_URL 
+      ? (Array.isArray(process.env.FRONTEND_URL) ? process.env.FRONTEND_URL : [process.env.FRONTEND_URL])
+      : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'https://fleetgps.vercel.app'];
+    
+    // Remove trailing slash from origin for comparison
+    const normalizedOrigin = origin ? origin.replace(/\/$/, '') : '';
+    
+    // Check if origin (with or without trailing slash) is in allowed list
+    const isAllowed = allowedOrigins.some(allowed => 
+      allowed === origin || 
+      allowed.replace(/\/$/, '') === normalizedOrigin
+    );
+    
+    if (!origin || isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
