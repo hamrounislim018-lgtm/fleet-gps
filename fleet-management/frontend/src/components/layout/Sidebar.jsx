@@ -13,36 +13,36 @@ const navGroups = [
   {
     label: 'التتبع والأسطول',
     items: [
-      { path: '/',            icon: LayoutDashboard, label: 'dashboard',   exact: true },
-      { path: '/tracking',    icon: MapPin,           label: 'tracking' },
-      { path: '/vehicles',    icon: Car,              label: 'vehicles' },
-      { path: '/drivers',     icon: Users,            label: 'drivers' },
+      { path: '/dashboard',            icon: LayoutDashboard, label: 'dashboard',   exact: true },
+      { path: '/dashboard/tracking',    icon: MapPin,           label: 'tracking' },
+      { path: '/dashboard/vehicles',    icon: Car,              label: 'vehicles' },
+      { path: '/dashboard/drivers',     icon: Users,            label: 'drivers' },
     ]
   },
   {
     label: 'العمليات',
     items: [
-      { path: '/tasks',       icon: ClipboardList,   label: 'tasks' },
-      { path: '/maintenance', icon: Wrench,           label: 'maintenance' },
-      { path: '/fuel',        icon: Fuel,             label: 'fuel' },
-      { path: '/driver-behavior', icon: TrendingUp,       label: 'behavior' },
-      { path: '/temperature', icon: Thermometer,      label: 'temperature' },
+      { path: '/dashboard/tasks',       icon: ClipboardList,   label: 'tasks' },
+      { path: '/dashboard/maintenance', icon: Wrench,           label: 'maintenance' },
+      { path: '/dashboard/fuel',        icon: Fuel,             label: 'fuel' },
+      { path: '/dashboard/driver-behavior', icon: TrendingUp,       label: 'behavior' },
+      { path: '/dashboard/temperature', icon: Thermometer,      label: 'temperature' },
     ]
   },
   {
     label: 'التقارير والتنبيهات',
     items: [
-      { path: '/geofences',   icon: Shield,           label: 'geofences' },
-      { path: '/alerts',      icon: Bell,             label: 'alerts' },
-      { path: '/reports',     icon: BarChart3,        label: 'reports' },
-      { path: '/analytics',   icon: Activity,         label: 'analytics' },
+      { path: '/dashboard/geofences',   icon: Shield,           label: 'geofences' },
+      { path: '/dashboard/alerts',      icon: Bell,             label: 'alerts' },
+      { path: '/dashboard/reports',     icon: BarChart3,        label: 'reports' },
+      { path: '/dashboard/analytics',   icon: Activity,         label: 'analytics' },
     ]
   },
   {
     label: 'الإدارة',
     items: [
-      { path: '/users',       icon: UserCog,          label: 'users',     roles: ['super_admin', 'admin'] },
-      { path: '/companies',   icon: Building2,        label: 'companies', roles: ['super_admin'] },
+      { path: '/dashboard/users',       icon: UserCog,          label: 'users',     roles: ['super_admin', 'admin'] },
+      { path: '/dashboard/companies',   icon: Building2,        label: 'companies', roles: ['super_admin'] },
     ]
   }
 ];
