@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard, MapPin, Car, Users, Shield,
@@ -100,16 +100,18 @@ export default function Sidebar({ isOpen, onClose }) {
                 <p className="text-[10px] font-semibold text-slate-600 uppercase tracking-widest px-3 mb-1.5">{group.label}</p>
                 <div className="space-y-0.5">
                   {visibleItems.map(({ path, icon: Icon, label, exact }) => (
-                    <NavLink
+                    <button
                       key={path}
-                      to={path}
-                      end={exact}
-                      onClick={() => window.innerWidth < 768 && onClose()}
-                      className={({ isActive }) => clsx('nav-item', isActive && 'active')}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate(path);
+                        if (window.innerWidth < 768) onClose();
+                      }}
+                      className={({ isActive }) => clsx('nav-item', window.location.pathname === path && 'active')}
                     >
                       <Icon size={16} strokeWidth={1.8} />
                       <span className="flex-1 text-sm">{t(label)}</span>
-                    </NavLink>
+                    </button>
                   ))}
                 </div>
               </div>
