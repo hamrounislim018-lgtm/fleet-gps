@@ -4,6 +4,7 @@
   "devCommand": "npx vite",
   "installCommand": "npm install",
   "framework": "vite",
+  "rootDirectory": "fleet-management/frontend",
   "rewrites": [
     {
       "source": "/(.*)",
