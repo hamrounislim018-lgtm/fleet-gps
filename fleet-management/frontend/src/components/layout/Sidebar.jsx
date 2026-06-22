@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard, MapPin, Car, Users, Shield,
@@ -51,12 +51,19 @@ export default function Sidebar({ isOpen, onClose }) {
   const { t } = useTranslation();
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     await logout();
     navigate('/login');
   };
 
+  const isActive = (path, exact = false) => {
+    if (exact) {
+      return location.pathname === path;
+    }
+    return location.pathname === path || location.pathname.startsWith(path + '/');
+  };
 
   return (
     <>
@@ -107,7 +114,10 @@ export default function Sidebar({ isOpen, onClose }) {
                         navigate(path);
                         if (window.innerWidth < 768) onClose();
                       }}
-                      className={({ isActive }) => clsx('nav-item', window.location.pathname === path && 'active')}
+                      className={clsx(
+                        'nav-item',
+                        isActive(path, exact) && 'active'
+                      )}
                     >
                       <Icon size={16} strokeWidth={1.8} />
                       <span className="flex-1 text-sm">{t(label)}</span>
